@@ -28,6 +28,7 @@ class Runner(BaseRunner):
         # match names whether the label list uses spaces or underscores ("tiger cat" / "tiger_cat")
         normalized = [c.replace("_", " ").lower() for c in self.categories]
         self.cat_ids = [normalized.index(name.lower()) for name in CAT_CLASSES]
+        open(LOG_FILE, "a").close()  # create the log file now, so "tail -f" works before the first request
 
     def run(self, image: Path = Input(description="Photo of a cat")) -> dict:
         """Runs for every request: classify one image."""
