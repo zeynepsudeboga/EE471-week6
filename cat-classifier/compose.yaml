@@ -1,0 +1,19 @@
+# Cat-kind classifier: Cog model container + website container
+# First build the model image once with:  cog build -t cat-classifier
+services:
+  model:
+    image: cat-classifier       # image produced by "cog build"
+    container_name: cat-model
+    ports:
+      - "5050:5000"             # Cog serves on 5000; Mac uses 5050 (macOS AirPlay already uses 5000)
+
+  web:
+    build: ./web
+    image: cat-web
+    container_name: cat-web
+    ports:
+      - "8000:8000"
+    environment:
+      COG_URL: http://model:5000  # containers reach each other by service name
+    depends_on:
+      - model

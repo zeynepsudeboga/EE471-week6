@@ -1,0 +1,13 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+# Cog / model files
+cat-classifier/hub/
+cat-classifier/.cog/
+*.pth
+body.json
+*.jpg
+*.jpeg
+*.png

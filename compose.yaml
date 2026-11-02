@@ -1,0 +1,15 @@
+# Runs both week-5 apps with one command: docker compose up --build
+services:
+  speech-studio:
+    build: ./speech-studio        # folder that contains the Dockerfile
+    image: speech-studio
+    ports:
+      - "5001:5001"               # Mac port 5001 -> container port 5001
+    env_file: .env                # Azure key is passed in at run time, never baked into the image
+
+  voice-calculator:
+    build: ./voice-calculator
+    image: voice-calculator
+    ports:
+      - "5002:5001"               # both apps use 5001 inside; the Mac side must differ
+    env_file: .env
